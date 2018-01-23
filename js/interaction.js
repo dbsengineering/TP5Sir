@@ -17,6 +17,7 @@ function DnD(canvas, interactor) {
 		this.coordInitX = getMousePosition(canvas, evt).x;
 		this.coordInitY = getMousePosition(canvas, evt).y;
 		this.pressed = true;
+		// Q5
 		console.log("Mouse down : " + this.coordInitX + " " + this.coordInitY);
 	}.bind(this);
 
@@ -26,6 +27,7 @@ function DnD(canvas, interactor) {
 		if (this.pressed){
 			this.coordFinX = getMousePosition(canvas, evt).x;
 			this.coordFinY = getMousePosition(canvas, evt).y;
+			// Q5
 			console.log("Mouvement : " + this.coordFinX + " " + this.coordFinY);
 		}
 	}.bind(this);
@@ -37,11 +39,12 @@ function DnD(canvas, interactor) {
 			this.coordFinX = getMousePosition(canvas, evt).x;
 			this.coordFinY = getMousePosition(canvas, evt).y;
 			this.pressed = false;
+			// Q5
 			console.log("Mouse up : " + this.coordInitX + " " + this.coordInitY + " " + this.coordFinX + " " + this.coordFinY);
 		}
 	}.bind(this);
 
-	// Question 3. Associer les fonctions précédentes aux évènements du canvas.
+	// Question 4. Associer les fonctions précédentes aux évènements du canvas.
 	canvas.addEventListener('mousedown', this.mousedown);
 	canvas.addEventListener('mousemove', this.mousemove);
 	canvas.addEventListener('mouseup', this.mouseup);
