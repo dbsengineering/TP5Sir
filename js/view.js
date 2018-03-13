@@ -10,7 +10,7 @@ Forme.prototype.paint = function(ctx){
 Rectangle.prototype.paint = function(ctx) {
     Forme.prototype.paint.call(this,ctx);
     //TODO Manager color
-    ctx.rect(this.getInitX(), this.getInitY(), this.getFinalX(), this.getFinalY());
+    ctx.rect(this.getInitX(), this.getInitY(), this.getLargeur(), this.getHauteur());
     ctx.stroke();
 };
     
@@ -70,7 +70,7 @@ Drawing.prototype.updateShapeList = function(){
 
     if(maForme instanceof Rectangle){
         li.appendChild(document.createTextNode("Rectangle(" + maForme.getInitX() + ","
-            + maForme.getInitY() + "," + maForme.getFinalX() + "," + maForme.getFinalY() + ")"));
+            + maForme.getInitY() + "," + maForme.getLargeur() + "," + maForme.getHauteur() + ")"));
     }
     if(maForme instanceof Line){
         li.appendChild(document.createTextNode("Line(" + maForme.getInitX() + "," + maForme.getInitY()

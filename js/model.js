@@ -44,8 +44,10 @@ function Rectangle(coordHGX, coordHGY, largeur, hauteur, epaisseur, couleur){
     //Initialisation des propriétées
     this.coordX = coordHGX; // Coordonée X
     this.coordY = coordHGY; // Coordonnée Y
-    this.coordXE = largeur; // Largeur du rectangle
-    this.coordYE = hauteur; // Hauteur du rectangle
+    this.largeur = largeur; // Largeur du rectangle
+    this.hauteur = hauteur; // Hauteur du rectangle
+    this.couleur = couleur;
+    this.epaisseur = epaisseur;
 
     //Fonction qui retourne la coordonnée de X
     this.getInitX = function(){
@@ -57,14 +59,14 @@ function Rectangle(coordHGX, coordHGY, largeur, hauteur, epaisseur, couleur){
         return this.coordY;
     }.bind(this);
 
-    //Fonction qui retourne la coordonnée de X final
-    this.getFinalX = function(){
-        return this.coordXE;
+    //Fonction qui retourne la largeur
+    this.getLargeur = function(){
+        return this.largeur;
     }.bind(this);
 
-    //Fonction qui retourne la coordonnée de Y final
-    this.getFinalY = function(){
-        return  this.coordYE;
+    //Fonction qui retourne la hauteur
+    this.getHauteur = function(){
+        return  this.hauteur;
     }.bind(this);
 };
 
@@ -75,6 +77,8 @@ function Line(coordSX, coordSY, coordEX, coordEY, epaisseur, couleur){
     this.coordY = coordSY;
     this.coordXE = coordEX;
     this.coordYE = coordEY;
+    this.couleur = couleur;
+    this.epaisseur = epaisseur;
 
     //Fonction qui retourne la coordonnée de X
     this.getInitX = function(){
@@ -104,6 +108,8 @@ function Circle(coordSX, coordSY, rayon, epaisseur, couleur){
     this.coordX = coordSX;
     this.coordY = coordSY;
     this.rayon = rayon;
+    this.couleur = couleur;
+    this.epaisseur = epaisseur;
 
     //Fonction qui retourne la coordonnée de X
     this.getInitX = function(){
@@ -119,6 +125,5 @@ function Circle(coordSX, coordSY, rayon, epaisseur, couleur){
     this.getRayon = function(){
         return this.rayon;
     }.bind(this);
-
 
 };
