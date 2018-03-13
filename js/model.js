@@ -29,12 +29,12 @@ function Forme(couleur, epaisseur){
     //Fonction qui retourne l'epaisseur de la forme
     this.getEpaisseur = function(){
       return this.epaisseur;
-    };
+    }.bind(this);
 
     // Fonction qui retourne la couleur de la forme
     this.getColor = function(){
         return this.couleur;
-    };
+    }.bind(this);
 
 };
 
@@ -42,58 +42,83 @@ function Forme(couleur, epaisseur){
 function Rectangle(coordHGX, coordHGY, largeur, hauteur, epaisseur, couleur){
     Forme.call(this, epaisseur, couleur);// Héritage
     //Initialisation des propriétées
-    this.coordHGX = coordHGX; // Coordonée X
-    this.coordHGY = coordHGY; // Coordonnée Y
-    this.largeur = largeur; // Largeur du rectangle
-    this.hauteur = hauteur; // Hauteur du rectangle
+    this.coordX = coordHGX; // Coordonée X
+    this.coordY = coordHGY; // Coordonnée Y
+    this.coordXE = largeur; // Largeur du rectangle
+    this.coordYE = hauteur; // Hauteur du rectangle
 
     //Fonction qui retourne la coordonnée de X
     this.getInitX = function(){
-        return this.coordHGX;
-    };
+        return this.coordX;
+    }.bind(this);
 
     //Fonction qui retourne la coordonnée de Y
     this.getInitY = function(){
-        return this.coordHGY;
-    };
+        return this.coordY;
+    }.bind(this);
 
     //Fonction qui retourne la coordonnée de X final
     this.getFinalX = function(){
-        return (this.coordHGX + this.largeur);
-    };
+        return this.coordXE;
+    }.bind(this);
 
     //Fonction qui retourne la coordonnée de Y final
     this.getFinalY = function(){
-        return (this.coordHGY + this.hauteur);
-    };
+        return  this.coordYE;
+    }.bind(this);
 };
 
 // Classe Line extends Forme
 function Line(coordSX, coordSY, coordEX, coordEY, epaisseur, couleur){
     Forme.call(this, epaisseur, couleur); //Héritage
-    this.coordSX = coordSX;
-    this.coordSY = coordSY;
-    this.coordEX = coordEX;
-    this.coordEY = coordEY;
+    this.coordX = coordSX;
+    this.coordY = coordSY;
+    this.coordXE = coordEX;
+    this.coordYE = coordEY;
 
-    //Fonction qui retourne la coordonnée x de départ
-    this.getCoordSX = function(){
-        return this.coordSX;
-    };
+    //Fonction qui retourne la coordonnée de X
+    this.getInitX = function(){
+        return this.coordX;
+    }.bind(this);
 
-    //Fonction qui retourne la coordonnée y de départ
-    this.getCoordSY = function(){
-        return this.coordSY;
-    };
+    //Fonction qui retourne la coordonnée de Y
+    this.getInitY = function(){
+        return this.coordY;
+    }.bind(this);
 
-    //Fonction qui retourne la coordonnée x finale
-    this.getCoordEX = function(){
-        return this.coordEX;
-    };
+    //Fonction qui retourne la coordonnée de X final
+    this.getFinalX = function(){
+        return this.coordXE;
+    }.bind(this);
 
-    //Fonction qui retourne la coordonnée y finale
-    this.getCoordEY = function(){
-        return this.coordEY;
-    };
+    //Fonction qui retourne la coordonnée de Y final
+    this.getFinalY = function(){
+        return  this.coordYE;
+    }.bind(this);
+
+};
+
+// Classe Line extends Forme
+function Circle(coordSX, coordSY, rayon, epaisseur, couleur){
+    Forme.call(this, epaisseur, couleur); //Héritage
+    this.coordX = coordSX;
+    this.coordY = coordSY;
+    this.rayon = rayon;
+
+    //Fonction qui retourne la coordonnée de X
+    this.getInitX = function(){
+        return this.coordX;
+    }.bind(this);
+
+    //Fonction qui retourne la coordonnée de Y
+    this.getInitY = function(){
+        return this.coordY;
+    }.bind(this);
+
+    //Fonction qui retourne le rayon
+    this.getRayon = function(){
+        return this.rayon;
+    }.bind(this);
+
 
 };

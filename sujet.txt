@@ -1,0 +1,13 @@
+Retour sur les base du développement d’une application Web
+Petite expérimentation ce jour, comme je suis à Paris, nous allons utiliser
+github comme plate-forme collaborative pour ce TP. L’idée est donc de
+forker un répository existant et d’utiliser github (en partie les issues) afin
+d’expliquer vos problèmes et tenter de les résoudre. Vous pouvez les
+résoudre entre vous, mais je serai en ligne aussi pour y répondre. Je
+partagerai des éléments de corrections sur gist aussi suite à vos
+questions.
+Le but du TP est de construire à la main une application Web suffisament
+complexe pour nécessiter la mise en place d’un MVC côté client. Cela
+permettra j’espère de mieux voir l’intérêt d’un framework comme
+AngularJS par la suite.
+

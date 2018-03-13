@@ -1,5 +1,5 @@
 
-var editingMode = { rect: 0, line: 1 };
+var editingMode = { rect: 0, line: 1 , circle: 2};
 
 function Pencil(ctx, drawing, canvas) {
 	this.currEditingMode = editingMode.line;
@@ -16,45 +16,62 @@ function Pencil(ctx, drawing, canvas) {
 	//Début du dessin
 	this.onInteractionStart = function(){
         this.currLineWidth = document.getElementById('spinnerWidth').value;
-        this.currColour = document.getElementById('colour').value;
+        this.currColour = document.getElementById('couleur').value;
         if(document.getElementById('butRect').checked){
-            this.currEditingMode = 0;
-        }else if(document.getElementById('butLine').checked){
-            this.currEditingMode = 1;
+            this.currEditingMode = editingMode.rect;
+        }
+        if(document.getElementById('butLine').checked){
+            this.currEditingMode = editingMode.line;
+        }
+        if(document.getElementById('butCircle').checked){
+            this.currEditingMode = editingMode.circle;
         }
 
-        //Siwtch sur une ligne ou un rectangle et affectation à la forme courante
-        console.log(this.currEditingMode);
+        //Switch sur une ligne ou un rectangle et affectation à la forme courante
         switch(this.currEditingMode){
-
-			case 0:
-                this.currentShape = new Rectangle(this.DnD.coordInitX, this.DnD.coordInitY
-					,0, 0, this.currLineWidth, this.currColour);
-				break;
-			case 1:
+            case editingMode.rect:
+                console.log("Un rectangle");
+                this.currentShape = new Rectangle(this.DnD.coordInitX, this.DnD.coordInitY,
+                    0, 0, this.currLineWidth, this.currColour);
+                break;
+            case editingMode.line:
+                console.log("Une ligne");
                 this.currentShape = new Line(this.DnD.coordInitX, this.DnD.coordInitY,
-                    this.DnD.coordFinX, this.DnD.coordFinY, this.currLineWidth, this.currColour);
-				break;
-		}
-        drawing.paint(ctx, canvas);
+                    this.DnD.coordInitX, this.DnD.coordInitY, this.currLineWidth, this.currColour);
+                break;
+
+            case editingMode.circle:
+                console.log("Un cercle");
+                var abPow = Math.pow(Math.abs(this.DnD.coordInitX-this.DnD.coordFinX),2);
+                var acPow = Math.pow(Math.abs(this.DnD.coordInitY-this.DnD.coordFinY),2);
+                var rayon = Math.sqrt(abPow + acPow);
+                this.currentShape = new Circle(this.DnD.coordInitX, this.DnD.coordInitY,
+                    rayon, this.currLineWidth, this.currColour);
+                break;
+        }
+
         this.currentShape.paint(ctx, canvas);
 
 	}.bind(this);
 
 	//Dessin sur le mouvement
     this.onInteractionUpdate = function(){
-        //ctx.clearRect(0, 0, canvas.width, canvas.height);
-        switch(this.currEditingMode){
 
-            case 0:
-                this.currentShape = new Rectangle(this.DnD.coordInitX, this.DnD.coordInitY
-                    ,this.DnD.coordFinX, this.DnD.coordFinY, this.currLineWidth, this.currColour);
-                break;
-            case 1:
-                this.currentShape = new Line(this.DnD.coordSX, this.DnD.coordSY,
-                    this.DnD.coordEX, this.DnD.coordEY, this.currLineWidth, this.currColour);
-                break;
+        if (this.currEditingMode == editingMode.rect){
+            var largeur = this.DnD.coordFinX - this.DnD.coordInitX;
+            var hauteur = this.DnD.coordFinY - this.DnD.coordInitY;
+            this.currentShape = new Rectangle(this.DnD.coordInitX, this.DnD.coordInitY, largeur, hauteur, this.currLineWidth, this.currColour);
         }
+        if (this.currEditingMode == editingMode.line){
+            this.currentShape = new Line(this.DnD.coordInitX, this.DnD.coordInitY, this.DnD.coordFinX, this.DnD.coordFinY, this.currLineWidth, this.currColour);
+        }
+        if (this.currEditingMode == editingMode.circle){
+            var abPow = Math.pow(Math.abs(this.DnD.coordInitX-this.DnD.coordFinX),2);
+            var acPow = Math.pow(Math.abs(this.DnD.coordInitY-this.DnD.coordFinY),2);
+            var rayon = Math.sqrt(abPow + acPow);
+            this.currentShape = new Circle(this.DnD.coordInitX, this.DnD.coordInitY, rayon, this.currLineWidth, this.currColour);
+        }
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
         drawing.paint(ctx, canvas);
         this.currentShape.paint(ctx, canvas);
 
@@ -62,21 +79,28 @@ function Pencil(ctx, drawing, canvas) {
 
     //Fin du dessin
     this.onInteractionEnd = function(){
-        switch(this.currEditingMode){
-
-            case 0:
-                this.currentShape = new Rectangle(this.DnD.coordInitX, this.DnD.coordInitY
-                    ,this.DnD.coordFinX,this.DnD.coordFinY, this.currLineWidth, this.currColour);
-                break;
-            case 1:
-                this.currentShape = new Line(this.DnD.coordSX, this.DnD.coordSY,
-                    this.DnD.coordEX, this.DnD.coordEY, this.currLineWidth, this.currColour);
-                break;
+        if (this.currEditingMode == editingMode.rect){
+            var largeur = this.DnD.coordFinX - this.DnD.coordInitX;
+            var hauteur = this.DnD.coordFinY - this.DnD.coordInitY;
+            this.currentShape = new Rectangle(this.DnD.coordInitX, this.DnD.coordInitY, largeur, hauteur, this.currLineWidth, this.currColour);
         }
+        if (this.currEditingMode == editingMode.line){
+            this.currentShape = new Line(this.DnD.coordInitX, this.DnD.coordInitY, this.DnD.coordFinX, this.DnD.coordFinY, this.currLineWidth, this.currColour);
+        }
+        if (this.currEditingMode == editingMode.circle){
+            var abPow = Math.pow(Math.abs(this.DnD.coordInitX-this.DnD.coordFinX),2);
+            var acPow = Math.pow(Math.abs(this.DnD.coordInitY-this.DnD.coordFinY),2);
+            var rayon = Math.sqrt(abPow + acPow);
+            this.currentShape = new Circle(this.DnD.coordInitX, this.DnD.coordInitY, rayon, this.currLineWidth, this.currColour);
+        }
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        drawing.addForm(this.currentShape);
         drawing.paint(ctx, canvas);
-        this.currentShape.paint(ctx, canvas);
+        drawing.updateShapeList(this.currentShape);
+        this.currentShape = null;
 
     }.bind(this);
+
 
 };
 

@@ -16,6 +16,8 @@ function DnD(canvas, interactor) {
 		// Q3
 		this.coordInitX = getMousePosition(canvas, evt).x;
 		this.coordInitY = getMousePosition(canvas, evt).y;
+        this.coordFinX = getMousePosition(canvas, evt).x;
+        this.coordFinY =getMousePosition(canvas, evt).y;
 		this.pressed = true;
 
 		//Q9
@@ -42,8 +44,6 @@ function DnD(canvas, interactor) {
 	this.mouseup = function(evt){
 		if (this.pressed){
 			// Q3
-			this.coordFinX = getMousePosition(canvas, evt).x;
-			this.coordFinY = getMousePosition(canvas, evt).y;
 			this.pressed = false;
             //Q9
 			interactor.onInteractionEnd(this);
