@@ -17,6 +17,9 @@ function DnD(canvas, interactor) {
 		this.coordInitX = getMousePosition(canvas, evt).x;
 		this.coordInitY = getMousePosition(canvas, evt).y;
 		this.pressed = true;
+
+		//Q9
+        interactor.onInteractionStart(this);
 		// Q5
 		console.log("Mouse down : " + this.coordInitX + " " + this.coordInitY);
 	}.bind(this);
@@ -27,6 +30,9 @@ function DnD(canvas, interactor) {
 		if (this.pressed){
 			this.coordFinX = getMousePosition(canvas, evt).x;
 			this.coordFinY = getMousePosition(canvas, evt).y;
+
+			//Q9
+            interactor.onInteractionUpdate(this);
 			// Q5
 			console.log("Mouvement : " + this.coordFinX + " " + this.coordFinY);
 		}
@@ -39,6 +45,8 @@ function DnD(canvas, interactor) {
 			this.coordFinX = getMousePosition(canvas, evt).x;
 			this.coordFinY = getMousePosition(canvas, evt).y;
 			this.pressed = false;
+            //Q9
+			interactor.onInteractionEnd(this);
 			// Q5
 			console.log("Mouse up : " + this.coordInitX + " " + this.coordInitY + " " + this.coordFinX + " " + this.coordFinY);
 		}
